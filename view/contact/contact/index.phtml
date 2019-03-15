@@ -1,0 +1,105 @@
+<?php
+
+$this->headTitle('Contact Us');
+
+$this->mainMenu()->setActiveItemId('contact');
+
+$this->pageBreadcrumbs()->setItems([
+    'Home' => $this->url('home'),
+    'Contact' => $this->url('contact')
+]);
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('contact'));
+$form->get('email')->setAttributes([
+    'class' => 'form-control',
+    'placeholder' => 'name@example.com'
+]);
+$form->get('subject')->setAttributes([
+    'class' => 'form-control',
+    'placeholder' => 'Type subject here'
+]);
+
+$form->get('message')->setAttributes([
+    'class' => 'form-control',
+    'rows' => 6,
+    'placeholder' => 'Type message text here'
+]);
+$form->get('submit')->setAttributes(['class' => 'btn btn-primary']);
+$form->prepare();
+
+?>
+
+<!-- Page Header -->
+<header class="masthead"
+        style="background-image: url(<?php echo $this->basePath('img/contact.jpg') ?>)">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>
+                        Contact Me
+                    </h1>
+                    <span class="subheading">Have questions? I have answers.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+            <h1 class="my-4">Contact
+                <small>form</small>
+            </h1>
+
+
+            <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as
+                possible!</p>
+
+            <?php echo $this->form()->openTag($form); ?>
+
+
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    <label><?php echo $this->formLabel($form->get('email')); ?></label>
+                    <?php echo $this->formElement($form->get('email')); ?>
+                    <p class="help-block text-danger"><?php echo $this->formElementErrors($form->get('email')); ?></p>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    <label><?php echo $this->formLabel($form->get('subject')); ?></label>
+                    <?php echo $this->formElement($form->get('subject')); ?>
+                    <p class="help-block text-danger"><?php echo $this->formElementErrors($form->get('subject')); ?></p>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label><?php echo $this->formLabel($form->get('message')); ?></label>
+                    <?php echo $this->formElement($form->get('message')); ?>
+                    <p class="help-block text-danger"><?php echo $this->formElementErrors($form->get('message')); ?></p>
+                </div>
+            </div>
+
+            <?php echo $this->formElement($form->get('csrf')); ?>
+
+            <div class="form-group" style="margin-top: 20px">
+                <?php echo $this->recaptcha->getHTML(); ?>
+            </div>
+
+
+            <?php echo $this->formElement($form->get('submit')); ?>
+
+            <?php echo $this->form()->closeTag(); ?>
+
+        </div>
+    </div>
+</div>
